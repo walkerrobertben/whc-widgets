@@ -1,0 +1,15 @@
+{
+    "extends": "@tsconfig/svelte/tsconfig.json",
+    "compilerOptions": {
+        "paths": {
+            "$components/*": ["./src/components/*"],
+        },
+    },
+    "include": [
+        "src/**/*",
+        "types/**/*.d.ts"
+    ],
+    "exclude": [
+        "node_modules/*"
+    ],
+}
