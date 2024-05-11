@@ -597,8 +597,35 @@
 		}
 	}
 
+	const Mount = (Component) => {
+	    const mountInContainer = () => {
+	        const container = document.createElement('div');
+	        new Component({ target: container });
+	        return container;
+	    };
+	    return {
+	        before: (element) => {
+	            if (element.parentNode) {
+	                const component = mountInContainer();
+	                element.parentNode.insertBefore(component, element);
+	            }
+	        },
+	        after: (element) => {
+	            if (element.parentNode) {
+	                const component = mountInContainer();
+	                if (element.nextSibling) {
+	                    element.parentNode.insertBefore(component, element.nextSibling);
+	                }
+	                else {
+	                    element.parentNode.appendChild(component);
+	                }
+	            }
+	        },
+	    };
+	};
 	var index = {
-	    ContactBanner: (target) => new Contact_banner({ target }),
+	    Mount,
+	    ContactBanner: Contact_banner,
 	};
 
 	return index;

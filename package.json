@@ -1,7 +1,8 @@
 {
   "type": "module",
   "scripts": {
-    "build": "rollup -c --bundleConfigAsCjs"
+    "build": "rollup -c --bundleConfigAsCjs",
+    "local": "cp ~/dev/GitHub/whc-widgets/build/bundle.js ~/dev/Overrides/cdn.jsdelivr.net/gh/walkerrobertben/whc-widgets@main/build/bundle.js"
   },
   "devDependencies": {
     "@rollup/plugin-alias": "^5.1.0",
