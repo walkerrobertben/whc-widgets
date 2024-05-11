@@ -13,7 +13,7 @@ export default {
     input: './src/index.ts',
     output: {
         name: 'whc',
-        format: 'esm',
+        format: 'umd',
         file: './build/bundle.js',
         sourcemap: true,
     },
