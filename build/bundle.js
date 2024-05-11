@@ -80,11 +80,26 @@
 	}
 
 	/**
+	 * @template {keyof SVGElementTagNameMap} K
+	 * @param {K} name
+	 * @returns {SVGElement}
+	 */
+	function svg_element(name) {
+		return document.createElementNS('http://www.w3.org/2000/svg', name);
+	}
+
+	/**
 	 * @param {string} data
 	 * @returns {Text}
 	 */
 	function text(data) {
 		return document.createTextNode(data);
+	}
+
+	/**
+	 * @returns {Text} */
+	function space() {
+		return text(' ');
 	}
 
 	/**
@@ -94,7 +109,8 @@
 	 * @returns {void}
 	 */
 	function attr(node, attribute, value) {
-		if (node.getAttribute(attribute) !== value) node.setAttribute(attribute, value);
+		if (value == null) node.removeAttribute(attribute);
+		else if (node.getAttribute(attribute) !== value) node.setAttribute(attribute, value);
 	}
 
 	/**
@@ -106,14 +122,11 @@
 	}
 
 	/**
-	 * @param {Text} text
-	 * @param {unknown} data
-	 * @returns {void}
-	 */
-	function set_data(text, data) {
-		data = '' + data;
-		if (text.data === data) return;
-		text.data = /** @type {string} */ (data);
+	 * @returns {void} */
+	function set_style(node, key, value, important) {
+		{
+			node.style.setProperty(key, value, '');
+		}
 	}
 
 	/**
@@ -539,61 +552,134 @@
 	  }
 	}
 
-	var css_248z = "div.svelte-i2h7lm{border:2px solid #f3f3f3;padding:50px;text-align:center}";
+	var css_248z = "/*! tailwindcss v3.4.3 | MIT License | https://tailwindcss.com*/*,:after,:before{border:0 solid #e5e7eb;box-sizing:border-box}:after,:before{--tw-content:\"\"}:host,html{-webkit-text-size-adjust:100%;font-feature-settings:normal;-webkit-tap-highlight-color:transparent;font-family:ui-sans-serif,system-ui,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;font-variation-settings:normal;line-height:1.5;-moz-tab-size:4;-o-tab-size:4;tab-size:4}body{line-height:inherit;margin:0}hr{border-top-width:1px;color:inherit;height:0}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-feature-settings:normal;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;font-size:1em;font-variation-settings:normal}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{border-collapse:collapse;border-color:inherit;text-indent:0}button,input,optgroup,select,textarea{font-feature-settings:inherit;color:inherit;font-family:inherit;font-size:100%;font-variation-settings:inherit;font-weight:inherit;letter-spacing:inherit;line-height:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0}fieldset,legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::-moz-placeholder,textarea::-moz-placeholder{color:#9ca3af;opacity:1}input::placeholder,textarea::placeholder{color:#9ca3af;opacity:1}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{height:auto;max-width:100%}[hidden]{display:none}*,:after,:before{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }.mx-auto{margin-left:auto;margin-right:auto}.mr-1{margin-right:.25rem}.mr-2{margin-right:.5rem}.mr-4{margin-right:1rem}.mr-auto{margin-right:auto}.flex{display:flex}.h-3{height:.75rem}.h-4{height:1rem}.h-5{height:1.25rem}.w-5{width:1.25rem}.transform{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.items-center{align-items:center}.rounded-full{border-radius:9999px}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255/var(--tw-bg-opacity))}.px-4{padding-left:1rem;padding-right:1rem}.py-1{padding-bottom:.25rem;padding-top:.25rem}.text-white{--tw-text-opacity:1;color:rgb(255 255 255/var(--tw-text-opacity))}.top-bar.svelte-tyurml{background-color:#331a05}.banner.svelte-tyurml{max-width:76.5rem}";
 	styleInject(css_248z);
 
 	/* src/components/contact-banner.svelte generated by Svelte v4.2.16 */
 
 	function create_fragment(ctx) {
-		let div;
-		let h1;
+		let div1;
+		let div0;
+		let a0;
+		let svg0;
+		let path0;
 		let t0;
-		let t1;
+		let span0;
 		let t2;
+		let a1;
+		let svg1;
+		let path1;
+		let t3;
+		let span1;
+		let t5;
+		let a2;
+		let svg2;
+		let path2;
+		let t6;
+		let a3;
+		let svg3;
+		let path3;
 
 		return {
 			c() {
-				div = element("div");
-				h1 = element("h1");
-				t0 = text("Hello ");
-				t1 = text(/*name*/ ctx[0]);
-				t2 = text("!");
-				attr(div, "class", "border rounded px-4 py-2 svelte-i2h7lm");
+				div1 = element("div");
+				div0 = element("div");
+				a0 = element("a");
+				svg0 = svg_element("svg");
+				path0 = svg_element("path");
+				t0 = space();
+				span0 = element("span");
+				span0.textContent = `${phone}`;
+				t2 = space();
+				a1 = element("a");
+				svg1 = svg_element("svg");
+				path1 = svg_element("path");
+				t3 = space();
+				span1 = element("span");
+				span1.textContent = `${email}`;
+				t5 = space();
+				a2 = element("a");
+				svg2 = svg_element("svg");
+				path2 = svg_element("path");
+				t6 = space();
+				a3 = element("a");
+				svg3 = svg_element("svg");
+				path3 = svg_element("path");
+				attr(path0, "fill", "currentColor");
+				attr(path0, "d", "m20.965 16.856-.844 3.55c-.105.528-.527.88-1.055.88C10.207 21.25 3 14.042 3 5.183c0-.528.316-.95.844-1.055l3.55-.844c.493-.105 1.02.176 1.231.633l1.652 3.832c.176.457.07.984-.316 1.266l-1.899 1.547a12.2 12.2 0 0 0 5.626 5.59l1.546-1.9c.282-.35.809-.491 1.266-.316l3.832 1.653c.457.246.738.773.633 1.265");
+				attr(svg0, "xmlns", "http://www.w3.org/2000/svg");
+				attr(svg0, "viewBox", "0 0 24 24");
+				attr(svg0, "class", "h-4 mr-1");
+				attr(a0, "class", "flex items-center mr-4");
+				attr(a0, "href", "tel:+" + phone);
+				attr(path1, "fill", "currentColor");
+				attr(path1, "d", "M20 4.608v8.142a3.25 3.25 0 0 1-3.066 3.245L16.75 16H3.25a3.25 3.25 0 0 1-3.245-3.066L0 12.75V4.608l9.652 5.056a.75.75 0 0 0 .696 0zM3.25 0h13.5a3.25 3.25 0 0 1 3.234 2.924L10 8.154.016 2.923A3.25 3.25 0 0 1 3.064.005zh13.5z");
+				attr(svg1, "xmlns", "http://www.w3.org/2000/svg");
+				attr(svg1, "viewBox", "0 0 20 16");
+				attr(svg1, "class", "h-3 mr-1");
+				attr(a1, "class", "flex items-center mr-auto");
+				attr(a1, "href", "mailto:+" + email);
+				attr(path2, "fill", "rgb(221, 79, 126)");
+				attr(path2, "d", "M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z");
+				attr(svg2, "viewBox", "0 0 24 24");
+				set_style(svg2, "transform", "scale(0.6)");
+				attr(a2, "class", "bg-white rounded-full w-5 h-5 mr-2");
+				attr(a2, "href", instagram);
+				attr(path3, "fill", "#1B74E4");
+				attr(path3, "d", "M211.9 197.4h-36.7v59.9h36.7V433.1h70.5V256.5h49.2l5.2-59.1h-54.4c0 0 0-22.1 0-33.7 0-13.9 2.8-19.5 16.3-19.5 10.9 0 38.2 0 38.2 0V82.9c0 0-40.2 0-48.8 0 -52.5 0-76.1 23.1-76.1 67.3C211.9 188.8 211.9 197.4 211.9 197.4z");
+				attr(svg3, "viewBox", "0 0 512 512");
+				attr(a3, "class", "bg-white rounded-full w-5 h-5");
+				attr(a3, "href", facebook);
+				attr(div0, "class", "banner px-4 mx-auto text-white flex items-center svelte-tyurml");
+				attr(div1, "class", "top-bar py-1 svelte-tyurml");
 			},
 			m(target, anchor) {
-				insert(target, div, anchor);
-				append(div, h1);
-				append(h1, t0);
-				append(h1, t1);
-				append(h1, t2);
+				insert(target, div1, anchor);
+				append(div1, div0);
+				append(div0, a0);
+				append(a0, svg0);
+				append(svg0, path0);
+				append(a0, t0);
+				append(a0, span0);
+				append(div0, t2);
+				append(div0, a1);
+				append(a1, svg1);
+				append(svg1, path1);
+				append(a1, t3);
+				append(a1, span1);
+				append(div0, t5);
+				append(div0, a2);
+				append(a2, svg2);
+				append(svg2, path2);
+				append(div0, t6);
+				append(div0, a3);
+				append(a3, svg3);
+				append(svg3, path3);
 			},
-			p(ctx, [dirty]) {
-				if (dirty & /*name*/ 1) set_data(t1, /*name*/ ctx[0]);
-			},
+			p: noop,
 			i: noop,
 			o: noop,
 			d(detaching) {
 				if (detaching) {
-					detach(div);
+					detach(div1);
 				}
 			}
 		};
 	}
 
-	function instance($$self, $$props, $$invalidate) {
-		let { name = 'world' } = $$props;
+	const phone = '+44 7907 478805';
+	const email = 'info@wehostchester.uk';
+	const facebook = 'https://www.facebook.com/wehostchester/';
+	const instagram = 'https://www.instagram.com/wehostchester/';
 
-		$$self.$$set = $$props => {
-			if ('name' in $$props) $$invalidate(0, name = $$props.name);
-		};
-
-		return [name];
+	function instance($$self) {
+		return [];
 	}
 
 	class Contact_banner extends SvelteComponent {
 		constructor(options) {
 			super();
-			init(this, options, instance, create_fragment, safe_not_equal, { name: 0 });
+			init(this, options, instance, create_fragment, safe_not_equal, {});
 		}
 	}
 
